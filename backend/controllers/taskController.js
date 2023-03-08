@@ -5,11 +5,11 @@ const taskController = {
   createTask: async (req, res) => {
     try {
       const { title, description } = req.body;
-      const userId = req.userId;
-      const task = await Task.create({ title, description, userId });
+      const user = req.userId;
+      const task = await Task.create({ title, description, user });
       res.status(200).json({ task, msg: "Task have been created" });
     } catch (error) {
-      return res.status(400).send({ error: "Error creating new task" });
+      return res.status(400).json({ errors: "Error creating new task" });
     }
   },
   getTask: async (req, res) => {
@@ -18,17 +18,16 @@ const taskController = {
       const task = await Task.findById(taskId);
       res.status(200).json({ task });
     } catch (error) {
-      return res.status(400).send({ error: "Task not found" });
+      return res.status(400).json({ errors: "Task not found" });
     }
   },
   getAllTasks: async (req, res) => {
     try {
-      const userId = req.userId;
-      const tasks = await Task.find({ userId });
-      console.log(tasks);
+      const user = req.userId;
+      const tasks = await Task.find({ user });
       res.status(200).json({ tasks });
     } catch (error) {
-      return res.status(400).send({ error: "Tasks not found" });
+      return res.status(400).json({ errors: "Tasks not found" });
     }
   },
   updateTask: async (req, res) => {
@@ -39,7 +38,7 @@ const taskController = {
         res.status(200).json({ updatedTask });
       });
     } catch (error) {
-      return res.status(400).send({ error: "Cannot update task" });
+      return res.status(400).json({ errors: "Cannot update task" });
     }
   },
   deleteTask: async (req, res) => {
@@ -48,7 +47,7 @@ const taskController = {
       await Task.findByIdAndDelete(taskId);
       res.status(200).json({ msg: "Task has been deleted" });
     } catch (error) {
-      return res.status(400).send({ error: "Cannot delete task" });
+      return res.status(400).json({ errors: "Cannot delete task" });
     }
   },
 };
