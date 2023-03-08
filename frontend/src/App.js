@@ -15,11 +15,11 @@ import Footer from "./components/common/Footer";
 import EditProfile from "./pages/EditProfile/EditProfile";
 
 function App() {
+ 
   const { auth, loading } = useAuth();
   if (loading) {
     return <p>Carregando...</p>
   }
-
   return (
     <div className="App">
       <Router>
