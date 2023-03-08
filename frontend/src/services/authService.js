@@ -25,7 +25,6 @@ const logout = () => {
 // Sign in a user
 const login = async (data) => {
     const config = requestConfig("POST", data);
-
     try {
         const res = await fetch(api + "/user/login", config)
             .then((res) => res.json())
