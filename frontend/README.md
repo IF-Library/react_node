@@ -14,3 +14,5 @@ store: Ficam as definições de state managers, context api, zustand, redux.
 types: Armazena as tipagens de typescript (types e interfaces) que são comuns em várias áreas do projeto.
 
 utils: Funções utilitárias como formatCurrency, formatPhone, convertTimezone, parsePhone (javascript puro).
+
+slice: relativo a parte do redux de tratar os dados da store e fazer ações por meio delas
