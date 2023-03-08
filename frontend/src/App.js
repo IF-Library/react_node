@@ -1,19 +1,38 @@
-import './index';
+import "./App.css";
 
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+// Router
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+
+// Pages
 import Home from './pages/Home/Home';
 import Register from './pages/Auth/Register';
 import Login from './pages/Auth/Login';
 
+// Hooks
+import { useAuth } from "./hooks/useAuth";
+import Navbar from './components/common/Navbar';
+import Footer from "./components/common/Footer";
+import EditProfile from "./pages/EditProfile/EditProfile";
+
 function App() {
+  const { auth, loading } = useAuth();
+  if (loading) {
+    return <p>Carregando...</p>
+  }
+
   return (
     <div className="App">
       <Router>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/account/login" element={<Login />} />
-          <Route path="/account/register" element={<Register />} />
-        </Routes>
+        <Navbar />
+        <div className="container">
+          <Routes>
+            <Route path="/" element={auth ? <Home /> : <Navigate to="/account/login" />} />
+            <Route path="/account/login" element={!auth ? <Login /> : <Navigate to="/" />} />
+            <Route path="/account/register" element={!auth ? <Register /> : <Navigate to="/" />} />
+            <Route path="/account/profile" element={auth ? <EditProfile /> : <Navigate to="/account/login" />} />
+          </Routes>
+        </div>
+        <Footer />
       </Router>
     </div>
   );
