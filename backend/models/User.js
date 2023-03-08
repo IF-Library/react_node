@@ -18,6 +18,14 @@ const userSchema = new mongoose.Schema(
             require: true,
             select: false,
         },
+        profileImage: {
+            type: String,
+            require: false,
+        },
+        bio: {
+            type: String,
+            require: false,
+        },
         tasks: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: "Task",
