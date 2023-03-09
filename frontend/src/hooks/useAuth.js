@@ -15,7 +15,8 @@ export const useAuth = () => {
   // useEffect roda toda vez que que a propriedade [user] muda
   useEffect(() => {
     // se tiver user então o auth (autenticado) é setado como true
-    if (user) {
+    console.log(user)
+    if (user && user.token) {
       setAuth(true);
     } else {
       setAuth(false);
